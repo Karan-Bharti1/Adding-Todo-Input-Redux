@@ -1,11 +1,13 @@
+import { ADD_TODO, REMOVE_TODO } from "../actions";
+
 const initialState={todos:[]}
 const todosReducer=(state=initialState,action)=>{
     switch(action.type){
-        case "Add_Todo":
+        case ADD_TODO:
             return{
 ...state,todos:[...state.todos,action.payload]
         }
-        case "REMOVE_TODO":
+        case REMOVE_TODO:
             return {...state,todos:state.todos.filter((todo,index)=>index!== action.payload)}
         default: 
         return state;

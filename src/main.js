@@ -2,9 +2,10 @@
 import './style.css'
 import { createStore } from 'redux'
 import todosReducer from './todosReducer'
+import { addTodo, removeTodo } from '../actions'
 const todoInput=document.getElementById("todoInput")
 const todoList=document.getElementById("todoList")
-const addTodo=document.getElementById("addTodo")
+const addTodos=document.getElementById("addTodo")
 const store=createStore(todosReducer)
 store.subscribe(()=>{
     updateTodoList()
@@ -12,13 +13,13 @@ store.subscribe(()=>{
 const addTodoHandler=()=>{
     const todoValue=todoInput.value
     if(todoValue){
-        store.dispatch({type:"Add_Todo",payload:todoValue})
+        store.dispatch(addTodo(todoValue))
     }
 }
 window.removeTodoHandler=(index)=>{
-    store.dispatch({type:"REMOVE_TODO",payload:index})
+    store.dispatch(removeTodo(index))
 }
-addTodo.addEventListener("click",addTodoHandler)
+addTodos.addEventListener("click",addTodoHandler)
 const updateTodoList=()=>{
     const state=store.getState()
     todoList.innerHTML=state.todos.map((todo,index)=>{
