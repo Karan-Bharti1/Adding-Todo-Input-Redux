@@ -15,11 +15,14 @@ const addTodoHandler=()=>{
         store.dispatch({type:"Add_Todo",payload:todoValue})
     }
 }
+window.removeTodoHandler=(index)=>{
+    store.dispatch({type:"REMOVE_TODO",payload:index})
+}
 addTodo.addEventListener("click",addTodoHandler)
 const updateTodoList=()=>{
     const state=store.getState()
-    todoList.innerHTML=state.todos.map(todo=>{
-    return `<li> ${todo} </li>`
+    todoList.innerHTML=state.todos.map((todo,index)=>{
+    return `<li> ${todo} <button class="btn btn-danger" onClick="removeTodoHandler(${index})">Delete </button></li>`
 }).join("")
 }
 updateTodoList()
